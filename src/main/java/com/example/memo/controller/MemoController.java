@@ -24,8 +24,6 @@ public class MemoController {
     @PostMapping("/api/memos")
     public MemoBody insertDbMemo(@RequestBody MemoDTO memoDTO){
         MemoBody  memoBody = new MemoBody(memoDTO);
-
         return  memoRepository.save(memoBody);
     }
-
 }
