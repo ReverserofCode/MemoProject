@@ -353,20 +353,20 @@
         function submitEdit(id) {
             // 1. 작성 대상 메모의 username과 contents 를 확인합니다.
             let username = $(`#${id}-username`).text().trim();
-            let contents = $(`#${id}-contents`).text().trim();
+            let contents = $(`#${id}-textarea`).val().trim();
             // 2. 작성한 메모가 올바른지 isValidContents 함수를 통해 확인합니다.
-            if (isValidContents(contents) == false){
+            if(isValidContents(contents) == false){
                 return;
             }
             // 3. 전달할 data JSON으로 만듭니다.
-            let data = {'username': username, 'contents': contents};
+            let data = {'username': username, 'contents':contents};
             // 4. PUT /api/memos/{id} 에 data를 전달합니다.
             $.ajax({
-                type:"PUT",
+                type: "PUT",
                 url: `/api/memos/${id}`,
                 contentType: "application/json",
                 data: JSON.stringify(data),
-                success: function (resoponse) {
+                success: function (response){
                     alert('메시지 변경에 성공하였습니다.');
                     window.location.reload();
                 }

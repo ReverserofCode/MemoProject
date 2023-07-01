@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityListeners;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -20,15 +21,25 @@ public class MemoController {
     private final MemoRepository memoRepository;
     private final MemoService memoService;
 
+
+    @GetMapping("/api/memos")
+    public List<MemoBody> getMemos() {
+        LocalDateTime start = LocalDateTime.now().minusDays(1);
+        LocalDateTime end = LocalDateTime.now();
+
+        return memoRepository.findAllByOrderByModifiedAtDesc();
+    }
+
     @PostMapping("/api/memos")
     public MemoBody insertDbMemo(@RequestBody MemoDTO memoDTO) {
         MemoBody memoBody = new MemoBody(memoDTO);
         return memoRepository.save(memoBody);
     }
 
-    @GetMapping("/api/memos")
-    public List<MemoBody> getMemos() {
-        return memoRepository.findAllByOrderByModifiedAtDesc();
+    @PutMapping("api/memos/{id}")
+    public Long updateMemo(@PathVariable Long id, @RequestBody MemoDTO memoDTO) {
+        memoService.update(id,memoDTO);
+        return id;
     }
 
     @DeleteMapping("/api/memos/{id}")
@@ -37,9 +48,4 @@ public class MemoController {
         return id;
     }
 
-    @PutMapping("api/memos/{id}")
-    public Long updateMemo(@PathVariable Long id, @RequestBody MemoDTO memoDTO) {
-        memoService.update(id,memoDTO);
-        return id;
-    }
 }
