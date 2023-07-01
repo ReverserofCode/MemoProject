@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class MemoService {
-    private MemoRepository memoRepository;
+
+    private final MemoRepository memoRepository;
     @Transactional
     public Long update(Long id, MemoDTO memoDTO){
         MemoBody memoBody = memoRepository.findById(id).orElseThrow(

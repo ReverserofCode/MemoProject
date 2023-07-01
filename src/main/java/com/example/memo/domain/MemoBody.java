@@ -31,5 +31,4 @@ public class MemoBody extends Timestamp {
         this.username = memoDTO.getUsername();
         this.contents = memoDTO.getContents();
     }
-
 }

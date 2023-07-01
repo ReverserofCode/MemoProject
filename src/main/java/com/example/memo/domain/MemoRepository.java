@@ -9,5 +9,5 @@ import java.util.List;
 
 @EnableJpaRepositories
 public interface MemoRepository extends JpaRepository<MemoBody,Long> {
-
+    List<MemoBody> findAllByOrderByModifiedAtDesc();
 }
