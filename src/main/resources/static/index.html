@@ -49,7 +49,7 @@
             top: 0px;
             width: 100%;
             height: 428px;
-            background-color: #339af0;
+            background-image: url("/images/wall.jpg");
         }
 
         .background-body {
@@ -353,7 +353,7 @@
         function editMemo(id) {
             // 1. 작성 대상 메모의 username과 contents 를 확인합니다.
             let username = $(`#${id}-username`).text().trim();
-            let contents = $(`#${id}-textarea`).text().trim();
+            let contents = $(`#${id}-textarea`).val().trim();
             // 2. 작성한 메모가 올바른지 isValidContents 함수를 통해 확인합니다.
             if (isValidContents(contents) == false){
                 return;
